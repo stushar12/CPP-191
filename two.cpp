@@ -1,18 +1,18 @@
 #include <iostream>
 #include<algorithm>
 using namespace std;
-bool isPossible(int cook[],int n,int prata,int time)
+bool isPossible(int cook[],int n,int prata,int mid)
 {
     int num = 0;
     for(int i=0;i<n;i++)
     {
-        int t = 0;
+        int t = 2;
         int next_time = cook[i];
-        while(t + next_time<=time)
+        while(next_time<=mid)
         {
-            num += 1;
-            t += next_time;
-            next_time += cook[i];
+            num++;
+            next_time=next_time+(cook[i]*t);
+            t++;
             if(num >= prata)
                 return true;
         }
@@ -21,29 +21,34 @@ bool isPossible(int cook[],int n,int prata,int time)
 }
 long minTimeNeeded(int cook[],int n,int prata)
 {
-    int s = 0;
-    int e = cook[n-1]*prata*(prata+1)/2;
+    int start = 0;
+    int end = cook[n-1]*prata*(prata+1)/2;
     int mid,ans = -1;
-    while(s<=e)
+    while(start<=end)
     {
-        mid = (s+e)/2;
-        if(isPossible(cook,n,prata,mid)){
-            e = mid-1;
+        mid = (start+end)/2;
+        if(isPossible(cook,n,prata,mid))
+        {
             ans = mid;
+            end = mid-1;
         }
         else
-            s = mid + 1;
+            start = mid + 1;
     }
     return ans;
 }
 int main()
 {
-    int t;cin>>t;
+    int t;
+    cin>>t;
+
     while(t--)
     {
-        int prata;cin>>prata;
+        int prata;
+        cin>>prata;
         int cook[51];
-        int n;cin>>n;
+        int n;
+        cin>>n;
         for(int i=0;i<n;i++)
             cin>>cook[i];
         sort(cook,cook+n);
