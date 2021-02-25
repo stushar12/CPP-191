@@ -3,17 +3,17 @@
 using namespace std;
 bool isPossible(int cook[],int n,int prata,int mid)
 {
-    int num = 0;
+    int required_prata = 0;
     for(int i=0;i<n;i++)
     {
         int t = 2;
-        int next_time = cook[i];
-        while(next_time<=mid)
+        int time_taken = cook[i];
+        while(time_taken<=mid)
         {
-            num++;
-            next_time=next_time+(cook[i]*t);
+            required_prata++;
+            time_taken=time_taken+(cook[i]*t);
             t++;
-            if(num >= prata)
+            if(required_prata >= prata)
                 return true;
         }
     }
