@@ -1,5 +1,4 @@
-#include <iostream>
-#include<algorithm>
+#include<bits/stdc++.h>
 using namespace std;
 bool isPossible(int cook[],int n,int prata,int mid)
 {
